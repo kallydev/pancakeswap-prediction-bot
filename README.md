@@ -22,11 +22,12 @@ I have tested a total of 400 rounds, my win rate is around 70%.
 
 ```shell
 # Ubuntu or Debian
-sudo update
-sudo apt install git make snapd -y
+sudo apt update
+sudo apt install git make snapd upx -y
 sudo snap install go --classic
 
 git clone https://github.com/kallydev/pancakeswap-prediction-bot
+cd pancakeswap-prediction-bot
 make build && ls ./build
 ```
 
