@@ -1,0 +1,34 @@
+name: Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.17
+      - name: Build
+        run: |
+          make build
+      - name: Test
+        run: go test -v ./...
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pancakeswap-prediction-bot_linux_amd64
+          path: ./build/pancakeswap-prediction-bot_linux_amd64
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pancakeswap-prediction-bot_windows_amd64
+          path: ./build/pancakeswap-prediction-bot_windows_amd64.exe
+      - uses: actions/upload-artifact@v2
+        with:
+          name: pancakeswap-prediction-bot_darwin_amd64
+          path: ./build/pancakeswap-prediction-bot_darwin_amd64
