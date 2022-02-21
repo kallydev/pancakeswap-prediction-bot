@@ -23,7 +23,7 @@ I have tested a total of 400 rounds, my win rate is around 70%.
 ```shell
 # Ubuntu or Debian
 sudo apt update
-sudo apt install git make snapd upx -y
+sudo apt install git snapd upx build-essential musl-dev -y
 sudo snap install go --classic
 
 git clone https://github.com/kallydev/pancakeswap-prediction-bot
@@ -33,10 +33,28 @@ make build && ls ./build
 
 ## Usage
 
+### Screen
+
 ```shell
 # Linux
+screen -S pancakeswap-prediction-bot
 ./build/pancakeswap-prediction-bot_linux_amd64 --help
 ./build/pancakeswap-prediction-bot_linux_amd64 --private-key replace_me_as_your_private_key --amount 0.01
+
+# Ctrl + A + D
+```
+
+### Docker
+
+```shell
+make build_image
+
+docker run \
+  --name pancakeswap-prediction-bot \
+  --restart=on-failure:3 \
+  -dit kallydev/pancakeswap-prediction-bot:latest \
+  --private-key replace_me_as_your_private_key \
+  --amount 0.01
 ```
 
 ## Donate
